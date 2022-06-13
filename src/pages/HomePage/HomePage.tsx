@@ -1,11 +1,10 @@
 import React from 'react';
-import { Loading } from '../../components';
+import {  Header, MealsList, CartList, Loading } from '../../components';
+import { useMeals } from '../../services/useMeals';
 import { StringUtils } from '../../utils';
-import { MovieList } from './MovieList';
-import { useMovies } from './useMovies';
-
+import { CartCtxProvider } from './../../contexts'
 export const HomePage = () => {
-  const { isLoading, isError, error, movies } = useMovies();
+   const { isLoading, isError, error, meals } = useMeals();
 
   if (isLoading) {
     return <Loading />;
@@ -21,8 +20,21 @@ export const HomePage = () => {
 
   return (
     <main>
-      <h1>Top 10 Movies Of All Time</h1>
-      <MovieList movies={movies} />
+      <CartCtxProvider>
+      <Header></Header>
+      <div className="container mx-auto">
+        <div className="flex flex-row flex-wrap">
+          <div className="basis-full md:basis-8/12">
+         <h1 className='text-5xl font-normal leading-normal mt-0 mb-2 text-slate-800'> Order your Food Here.</h1>
+          <MealsList meals={meals}></MealsList>
+          </div>
+          <div className="basis-full md:basis-4/12">
+          <h1 className='text-5xl font-normal leading-normal mt-0 mb-2 text-slate-800'> Your Cart.</h1>
+          <CartList></CartList>
+          </div>
+        </div>
+      </div>
+      </CartCtxProvider>
     </main>
   );
 };
