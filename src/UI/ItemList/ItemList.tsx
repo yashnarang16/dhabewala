@@ -20,7 +20,7 @@ export const ItemList = ({ items, addItemHandler, removeItemHandler }: itemListP
     return (
         <ul className="bg-white bg-gray-800 max-w-full rounded-lg">
             {items.map((item: Meals) =>
-                <li className="px-6 py-4 border-b border-gray-200 w-full rounded-t-lg text-white">{item.name}
+                <li key={item.id} className="px-6 py-4 border-b border-gray-200 w-full rounded-t-lg text-white">{item.name}
                     <div className="float-right">
                         <span className="text-sm inline-block m-1 py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-yellow-500 text-white rounded">${item.price.toFixed(2)}</span>
                         <span className='text-white'>x</span>
