@@ -33,7 +33,9 @@ export const HomePage = () => {
           <div className="flex flex-row flex-wrap">
             <div className="basis-full md:basis-7/12">
                 <SubHeading>Order your food here.</SubHeading>
+                <div className='rounded-lg shadow-md md:h-screen m-5 overflow-auto scroll-smooth'>
                 <MealsList meals={meals}></MealsList>
+                </div>
             </div>
             <div className="basis-full md:basis-5/12">
               <SubHeading>Your cart.</SubHeading>

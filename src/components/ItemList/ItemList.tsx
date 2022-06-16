@@ -18,7 +18,7 @@ export const ItemList = ({ items, onItemAdd, onItemRemove }: itemListProps) => {
   };
 
   return (
-    <ul className="bg-white bg-gray-800 max-w-full rounded-lg">
+    <ul className="bg-white bg-gray-800 max-w-full rounded-lg md:h-40 overflow-y-auto scroll-smooth">
       {items.map((item: MenuItem) => (
         <li
           key={item.id}

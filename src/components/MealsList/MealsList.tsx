@@ -22,6 +22,6 @@ export const MealsList = ({ meals }: MealsProps) => {
           addEventHandler={addItemInCart.bind(null, meal)}
         ></ItemCard>
       ))}
-    </div>
+        </div>
   );
 };

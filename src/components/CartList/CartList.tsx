@@ -23,7 +23,7 @@ export const CartList = () => {
   };
 
   return (
-    <div className="max-w-full rounded-lg shadow-md bg-white py-3 px-3 border-b border-amber-200">
+    <div className="max-w-full rounded-lg shadow-md bg-white p-3 m-5 border-b border-amber-200">
       <ItemList
         items={items}
         onItemAdd={addItem}
