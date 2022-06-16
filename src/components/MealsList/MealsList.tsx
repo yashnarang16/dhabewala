@@ -14,7 +14,7 @@ export const MealsList = ({ meals }: MealsProps) => {
   };
 
   return (
-    <div className="flex flex-row flex-wrap">
+    <div className="flex flex-row flex-wrap justify-center">
       {meals.map((meal: MenuItem) => (
         <ItemCard
           key={meal.id}

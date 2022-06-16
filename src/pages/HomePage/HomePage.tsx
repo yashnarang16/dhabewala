@@ -30,7 +30,7 @@ export const HomePage = () => {
       <CartContextProvider>
         <Header></Header>
         <div className="container mx-auto">
-          <div className="flex flex-row flex-wrap">
+          <div className="flex flex-row flex-wrap justify-center">
             <div className="basis-full md:basis-7/12">
                 <SubHeading>Order your food here.</SubHeading>
                 <div className='rounded-lg shadow-md md:h-screen m-5 overflow-auto scroll-smooth'>
