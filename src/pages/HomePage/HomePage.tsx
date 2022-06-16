@@ -1,10 +1,17 @@
 import React from 'react';
-import {  Header, MealsList, CartList, Loading } from '../../components';
+import {
+  Header,
+  MealsList,
+  Loading,
+  CartList,
+  SubHeading,
+} from '../../components';
+import { CartContextProvider } from '../../contexts';
 import { useMeals } from '../../services/useMeals';
 import { StringUtils } from '../../utils';
-import { CartCtxProvider } from './../../contexts'
+
 export const HomePage = () => {
-   const { isLoading, isError, error, meals } = useMeals();
+  const { isLoading, isError, error, meals } = useMeals();
 
   if (isLoading) {
     return <Loading />;
@@ -20,21 +27,21 @@ export const HomePage = () => {
 
   return (
     <main>
-      <CartCtxProvider>
-      <Header></Header>
-      <div className="container mx-auto">
-        <div className="flex flex-row flex-wrap">
-          <div className="basis-full md:basis-8/12">
-         <h1 className='text-5xl font-normal leading-normal mt-0 mb-2 text-slate-800'> Order your Food Here.</h1>
-          <MealsList meals={meals}></MealsList>
-          </div>
-          <div className="basis-full md:basis-4/12">
-          <h1 className='text-5xl font-normal leading-normal mt-0 mb-2 text-slate-800'> Your Cart.</h1>
-          <CartList></CartList>
+      <CartContextProvider>
+        <Header></Header>
+        <div className="container mx-auto">
+          <div className="flex flex-row flex-wrap">
+            <div className="basis-full md:basis-7/12">
+                <SubHeading>Order your food here.</SubHeading>
+                <MealsList meals={meals}></MealsList>
+            </div>
+            <div className="basis-full md:basis-5/12">
+              <SubHeading>Your cart.</SubHeading>
+              <CartList></CartList>
+            </div>
           </div>
         </div>
-      </div>
-      </CartCtxProvider>
+      </CartContextProvider>
     </main>
   );
 };

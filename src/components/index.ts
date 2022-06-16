@@ -3,3 +3,7 @@ export * from './Loading';
 export * from './Header';
 export * from './MealsList';
 export * from './CartList';
+export * from './ItemList';
+export * from './ItemCard';
+export * from './Badge';
+export * from './SubHeading';

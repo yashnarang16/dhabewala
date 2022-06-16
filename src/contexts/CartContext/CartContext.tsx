@@ -1,79 +1,76 @@
-
 import React, { useReducer } from 'react';
-import { MealCtx, Meals } from '../../models';
+import { MenuItem } from '../../models';
 
+type Action = { type: 'ADD'; item: MenuItem } | { type: 'REMOVE'; id: string };
+type Dispatch = (action: Action) => void;
+type State = { items: MenuItem[] };
+type CartContextProviderProps = { children: React.ReactNode };
 
-const defaultCart = {
-    items: []
-}
-const CartContext = React.createContext<MealCtx>({
-    items: [],
-    addItem: (item: Meals) => { },
-    removeItem: (id: string) => { }
-})
+const CartContext = React.createContext<
+  { state: State; dispatch: Dispatch } | undefined
+>(undefined);
 
-
-
-const ctxReducer = (state: { items: Meals[] }, action: { type: string, item: Meals | string | undefined }) => {
-    if (action.type === 'ADD') {
-        const existingItemIndex = state.items.findIndex((item) => {
-            return item.id === (action.item as Meals)?.id;
-        })
-        const existingItem = state.items[existingItemIndex];
-        let updatedItems;
-        if (existingItem) {
-            const updatedNewItem = { ...existingItem, quantity: existingItem.quantity + (action.item as Meals).quantity }
-            updatedItems = [...state.items];
-            updatedItems[existingItemIndex] = updatedNewItem;
-        } else {
-            updatedItems = state.items.concat(action.item as Meals);
-        }
-        return { items: updatedItems };
-    }
-    if (action.type === 'REMOVE') {
-        const existingItemIndex = state.items.findIndex((item) => {
-            return item.id === action.item;
-        })
-        const existingItem = state.items[existingItemIndex];
-        let updatedItems;
-        if (existingItem.quantity > 1) {
-            const updatedNewItem = { ...existingItem, quantity: existingItem.quantity - 1 }
-            updatedItems = [...state.items];
-            updatedItems[existingItemIndex] = updatedNewItem;
-        } else {
-            updatedItems = state.items.filter(item => item.id !== action?.item as string);
-        }
-
-        return { items: updatedItems };
-    }
-    return defaultCart;
-}
-
-
-interface providerProps {
-    children?: React.ReactNode;
-}
-function CartCtxProvider({ children }: providerProps) {
-    const [cartCtx, dispatchActionCtx] = useReducer(ctxReducer, defaultCart);
-
-    const addHandler = (item: Meals) => {
-        dispatchActionCtx({ type: 'ADD', item: item });
+const ctxReducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case 'ADD': {
+      const existingItemIndex = state.items.findIndex((item) => {
+        return item.id === (action.item as MenuItem)?.id;
+      });
+      const existingItem = state.items[existingItemIndex];
+      let updatedItems;
+      if (existingItem) {
+        const updatedNewItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + (action.item as MenuItem).quantity,
+        };
+        updatedItems = [...state.items];
+        updatedItems[existingItemIndex] = updatedNewItem;
+      } else {
+        updatedItems = state.items.concat(action.item as MenuItem);
+      }
+      return { items: updatedItems };
     }
 
-    const removeHandler = (id: string) => {
-        dispatchActionCtx({ type: 'REMOVE', item: id });
+    case 'REMOVE': {
+      const existingItemIndex = state.items.findIndex((item) => {
+        return item.id === action.id;
+      });
+      const existingItem = state.items[existingItemIndex];
+      let updatedItems;
+      if (existingItem.quantity > 1) {
+        const updatedNewItem = {
+          ...existingItem,
+          quantity: existingItem.quantity - 1,
+        };
+        updatedItems = [...state.items];
+        updatedItems[existingItemIndex] = updatedNewItem;
+      } else {
+        updatedItems = state.items.filter(
+          (item) => item.id !== (action?.id as string)
+        );
+      }
+
+      return { items: updatedItems };
     }
 
-
-    const cart: MealCtx = {
-        items: cartCtx.items,
-        addItem: addHandler,
-        removeItem: removeHandler
+    default: {
+      throw new Error(`Unhandled action type: ${action}`);
     }
-    return (
-        <CartContext.Provider value={cart}>{children}</CartContext.Provider>
-    )
+  }
+};
 
+function CartContextProvider({ children }: CartContextProviderProps) {
+  const [state, dispatch] = useReducer(ctxReducer, { items: [] });
+  const cart = { state, dispatch };
+  return <CartContext.Provider value={cart}>{children}</CartContext.Provider>;
 }
 
-export { CartCtxProvider, CartContext }; 
+function useCart() {
+  const context = React.useContext(CartContext);
+  if (context === undefined) {
+    throw new Error('useCount must be used within a CountProvider');
+  }
+  return context;
+}
+
+export { CartContextProvider, useCart };

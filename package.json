@@ -16,7 +16,7 @@
     "build-storybook": "build-storybook -s public",
     "cypress": "cypress open",
     "eject": "react-scripts eject",
-    "format": "prettier --write README.md \"src/**/{*.md,*.json,*.css,*.ts*}\" \"cypress/integration/**/*\"",
+    "format": "prettier --write README.md \"src/**/{*.md,*.json,*.css,*.ts*}\"",
     "lint": "eslint src",
     "prepare": "husky install",
     "start": "react-scripts start",
