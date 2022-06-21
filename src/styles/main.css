@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html {
+    height: 100%;
+}
+
+
+.container-height {
+    height: calc(100vh - 96px);
+}
+
+
+
+
+

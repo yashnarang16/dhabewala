@@ -11,13 +11,13 @@ export const ItemCard = ({ meal, addEventHandler }: ItemCardProps) => {
   const image = `./images/${meal.image}`;
 
   return (
-    <div className="max-w-sm rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 m-4">
+    <div className="max-w-sm rounded-lg max-h-80 shadow-md dark:bg-gray-800 dark:border-gray-700 m-4">
       <img
         className="w-full h-4/6 rounded-t-lg"
         src={image}
         alt={meal.imageDescription}
       />
-      <div className="px-5 pt-0.5">
+      <div className="p-2">
         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {meal.name}
         </h5>
@@ -29,7 +29,7 @@ export const ItemCard = ({ meal, addEventHandler }: ItemCardProps) => {
             ${meal.price.toFixed(2)}
           </span>
           <Button
-            className="bg-amber-700 hover:bg-amber-800"
+            className="bg-amber-800 hover:bg-amber-700"
             onClick={addEventHandler}
           >
             Add to cart

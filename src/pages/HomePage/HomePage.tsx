@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Header,
   MealsList,
   Loading,
   CartList,
   SubHeading,
+  Header,
 } from '../../components';
 import { CartContextProvider } from '../../contexts';
 import { useMeals } from '../../services/useMeals';
@@ -30,14 +30,12 @@ export const HomePage = () => {
       <CartContextProvider>
         <Header></Header>
         <div className="container mx-auto">
-          <div className="flex flex-row flex-wrap justify-center">
-            <div className="basis-full md:basis-7/12">
-                <SubHeading>Order your food here.</SubHeading>
-                <div className='rounded-lg shadow-md md:h-screen m-5 overflow-auto scroll-smooth'>
+          <div className="flex flex-column flex-wrap justify-center">
+            <div className="basis-full md:basis-7/12 rounded-lg shadow-md container-height overflow-y-scroll overscroll-y-auto scroll-smooth">
+                <SubHeading>Order your food here.</SubHeading>  
                 <MealsList meals={meals}></MealsList>
-                </div>
             </div>
-            <div className="basis-full md:basis-5/12">
+            <div className="basis-full md:basis-5/12 shadow-md container-height overflow-y-scroll overscroll-y-auto scroll-smooth">
               <SubHeading>Your cart.</SubHeading>
               <CartList></CartList>
             </div>

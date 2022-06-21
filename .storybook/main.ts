@@ -9,6 +9,6 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-links',
-    '@storybook/addon-a11y',
+    '@storybook/addon-a11y'
   ],
 };

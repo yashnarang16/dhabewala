@@ -18,7 +18,7 @@ export const ItemList = ({ items, onItemAdd, onItemRemove }: itemListProps) => {
   };
 
   return (
-    <ul className="bg-white bg-gray-800 max-w-full rounded-lg md:h-40 overflow-y-auto scroll-smooth">
+    <ul className="bg-white bg-gray-800 max-w-full rounded-lg">
       {items.map((item: MenuItem) => (
         <li
           key={item.id}
@@ -26,9 +26,9 @@ export const ItemList = ({ items, onItemAdd, onItemRemove }: itemListProps) => {
         >
           {item.name}
           <div className="float-right">
-            <Badge className="bg-yellow-500">{item.price.toFixed(2)}</Badge>
+            <Badge className="bg-amber-800">{item.price.toFixed(2)}</Badge>
             <span className="text-white">x</span>
-            <Badge className="bg-yellow-500">{item.quantity}</Badge>
+            <Badge className="bg-amber-800">{item.quantity}</Badge>
             <FaMinusSquare
               className="cursor-pointer inline-block fill-white-500 text-xl"
               onClick={removeItem.bind(null, item.id)}
