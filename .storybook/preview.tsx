@@ -2,7 +2,8 @@ import React, { Suspense } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ErrorBoundary, Loading } from '../src/components';
 import { EnvProvider } from '../src/contexts';
-import '../src/styles/main.css';
+import '!style-loader!css-loader!postcss-loader!tailwindcss/tailwind.css';
+
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
